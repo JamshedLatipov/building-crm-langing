@@ -30,24 +30,21 @@ export const Header: React.FC = () => {
             </nav>
           </div>
           <div className="flex items-center space-x-6">
-            <div className="relative flex flex-col items-start">
-              <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-1 ml-1">Context</span>
-              <div className="relative">
-                <select
-                  value={profile.role}
-                  onChange={(e) => setProfile({ role: e.target.value as any })}
-                  className="text-xs font-bold border border-gray-100 bg-gray-50 rounded-lg pl-3 pr-8 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0070ad]/20 appearance-none hover:bg-gray-100 transition-colors"
-                >
-                  <option value="General">Generic</option>
-                  <option value="CEO">Executive (CEO)</option>
-                  <option value="CTO">Technical (CTO)</option>
-                  <option value="Gov">Government</option>
-                  <option value="Startup">Startup Founder</option>
-                  <option value="Investor">Investor</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-                  <ChevronDown size={12} />
-                </div>
+            <div className="relative">
+              <select
+                value={profile.role}
+                onChange={(e) => setProfile({ role: e.target.value as any })}
+                className="text-xs font-bold border border-gray-100 bg-gray-50 rounded-lg pl-3 pr-8 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0070ad]/20 appearance-none hover:bg-gray-100 transition-colors"
+              >
+                <option value="General">Generic</option>
+                <option value="CEO">Executive (CEO)</option>
+                <option value="CTO">Technical (CTO)</option>
+                <option value="Gov">Government</option>
+                <option value="Startup">Startup Founder</option>
+                <option value="Investor">Investor</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                <ChevronDown size={12} />
               </div>
             </div>
             <Link href="#" className="bg-[#0070ad] text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-blue-500/20 hover:bg-[#005a8d] hover:shadow-blue-500/40 transition-all active:scale-95">
