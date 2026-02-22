@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CAPGEMINI_AI | AI-Driven IT Solutions",
+  title: "Dynamic AI | AI-Driven IT Solutions",
   description: "Advanced IT solutions powered by AI. Software, DevOps, Cloud, and Security.",
 };
 
