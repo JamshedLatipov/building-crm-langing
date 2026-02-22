@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+:root {
+  --capgemini-blue: #0070ad;
+  --capgemini-dark-blue: #005a8d;
+  --background: #ffffff;
+  --foreground: #333333;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#0070ad] text-white px-6 py-2 rounded font-bold hover:bg-[#005a8d] transition-all;
+  }
+}
+
+.animate-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
