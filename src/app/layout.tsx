@@ -18,7 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Dynamic AI | AI-Driven IT Solutions",
-  description: "Advanced IT solutions powered by AI. Software, DevOps, Cloud, and Security.",
+  description:
+    "Advanced IT solutions powered by AI. Software, DevOps, Cloud, and Security.",
 };
 
 export default function RootLayout({
@@ -28,12 +29,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-[#333333]`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-[#333333]`}
+      >
         <AIProvider>
           <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
+          <main className="min-h-screen">{children}</main>
           <AIAssistant />
           <Footer />
         </AIProvider>
