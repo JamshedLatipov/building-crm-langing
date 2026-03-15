@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAI } from '@/context/AIContext';
 
 const STEPS = [
   { id: 1, title: 'Project Type', questions: ['What are you building? (Web App, Mobile, AI Platform, etc.)'] },
@@ -9,10 +10,28 @@ const STEPS = [
 ];
 
 export const BriefBuilder: React.FC = () => {
+  const { profile } = useAI();
   const [step, setStep] = useState(1);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isGenerating, setIsGenerating] = useState(false);
   const [brief, setBrief] = useState<string | null>(null);
+
+  useEffect(() => {
+    const defaultAnswers: Record<string, string> = {};
+    if (profile.industry === 'Finance') {
+      defaultAnswers['Are there specific security requirements?'] = 'Strict PCI-DSS Compliance, End-to-End Encryption';
+      defaultAnswers['Who are the target users?'] = 'High Net Worth Individuals / Banking Clients';
+    } else if (profile.industry === 'Healthcare') {
+      defaultAnswers['Are there specific security requirements?'] = 'HIPAA Compliance, PII Data Anonymization';
+      defaultAnswers['What are you building? (Web App, Mobile, AI Platform, etc.)'] = 'Telehealth Mobile Platform';
+    } else if (profile.role === 'Startup') {
+      defaultAnswers['What is your preferred timeline?'] = 'MVP in 4-6 weeks';
+    } else if (profile.role === 'Gov') {
+      defaultAnswers['Are there specific security requirements?'] = 'FedRAMP Compliance, Sovereign Cloud';
+    }
+
+    setAnswers(prev => ({ ...prev, ...defaultAnswers }));
+  }, [profile.industry, profile.role]);
 
   const handleNext = () => {
     if (step < STEPS.length) {

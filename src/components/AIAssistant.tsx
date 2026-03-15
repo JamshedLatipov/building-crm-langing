@@ -1,26 +1,79 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAI } from '@/context/AIContext';
 
 export const AIAssistant: React.FC = () => {
+  const { profile, setProfile } = useAI();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
-    { role: 'assistant', content: 'Hello! I am your Solution Architect AI. How can I help you today?' }
-  ]);
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
   const [input, setInput] = useState('');
+
+  // Initial welcome message based on profile
+  useEffect(() => {
+    if (messages.length === 0) {
+      const greeting = profile.industry !== 'General'
+        ? `Hello! I am your Solution Architect AI. I see you're in the ${profile.industry} sector. How can I help you today?`
+        : 'Hello! I am your Solution Architect AI. How can I help you today?';
+      setMessages([{ role: 'assistant', content: greeting }]);
+    }
+  }, [profile.industry, messages.length]);
 
   const handleSend = () => {
     if (!input.trim()) return;
-    const newMessages = [...messages, { role: 'user', content: input } as const];
+    const userText = input;
+    const newMessages = [...messages, { role: 'user', content: userText } as const];
     setMessages(newMessages);
     setInput('');
 
-    // Mock response
+    // Context updating logic
+    const lowerInput = userText.toLowerCase();
+    let newIndustry = profile.industry;
+    let newRole = profile.role;
+    let updatedContext = false;
+
+    if (lowerInput.includes('bank') || lowerInput.includes('finance')) {
+      newIndustry = 'Finance';
+      updatedContext = true;
+    } else if (lowerInput.includes('health') || lowerInput.includes('hospital')) {
+      newIndustry = 'Healthcare';
+      updatedContext = true;
+    } else if (lowerInput.includes('telecom')) {
+      newIndustry = 'Telecom';
+      updatedContext = true;
+    }
+
+    if (lowerInput.includes('cto') || lowerInput.includes('tech lead')) {
+      newRole = 'CTO';
+      updatedContext = true;
+    } else if (lowerInput.includes('ceo') || lowerInput.includes('founder')) {
+      newRole = 'CEO';
+      updatedContext = true;
+    }
+
+    if (updatedContext) {
+      setProfile({ industry: newIndustry, role: newRole });
+    }
+
+    // Mock dynamic response
     setTimeout(() => {
-      setMessages([...newMessages, {
-        role: 'assistant',
-        content: 'That sounds like an interesting project. Based on our best practices, I would recommend a cloud-native microservices architecture with a focus on data security. Would you like to explore a specific architectural diagram?'
-      }]);
+      let response = `That sounds like an interesting project. `;
+
+      if (updatedContext) {
+        response += `I've updated your profile to ${newRole} in ${newIndustry}. `;
+      }
+
+      if (lowerInput.includes('react') || lowerInput.includes('frontend')) {
+        response += 'For frontend development, I strongly recommend a Next.js architecture with Edge caching.';
+      } else if (lowerInput.includes('database') || lowerInput.includes('data')) {
+        response += 'For data-heavy applications, a Data Lakehouse approach with Snowflake or Databricks works best.';
+      } else if (newIndustry === 'Finance') {
+        response += 'Given your industry, security is paramount. I recommend a cloud-native microservices architecture with Zero-Trust network policies.';
+      } else {
+        response += 'Based on our best practices, I would recommend a scalable serverless architecture. Would you like to explore the Architecture Studio?';
+      }
+
+      setMessages([...newMessages, { role: 'assistant', content: response }]);
     }, 1000);
   };
 

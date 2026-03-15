@@ -1,14 +1,32 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAI } from '@/context/AIContext';
 
 const GOALS = ['Scalability', 'Security', 'Cost Efficiency', 'High Availability', 'Low Latency'];
 const STACKS = ['Modern Web', 'Data Engineering', 'Microservices', 'Serverless'];
 
 export const ArchitectureStudio: React.FC = () => {
+  const { profile } = useAI();
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [stack, setStack] = useState('');
   const [isGenerated, setIsGenerated] = useState(false);
+
+  useEffect(() => {
+    if (profile.industry === 'Finance') {
+      setSelectedGoals(['Security', 'High Availability']);
+      setStack('Microservices');
+    } else if (profile.industry === 'Healthcare') {
+      setSelectedGoals(['Security', 'Low Latency']);
+      setStack('Data Engineering');
+    } else if (profile.role === 'Startup') {
+      setSelectedGoals(['Scalability', 'Cost Efficiency']);
+      setStack('Serverless');
+    } else {
+      setSelectedGoals(['Scalability']);
+      setStack('Modern Web');
+    }
+  }, [profile.industry, profile.role]);
 
   const toggleGoal = (goal: string) => {
     setSelectedGoals(prev =>

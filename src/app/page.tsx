@@ -48,19 +48,45 @@ export default function Home() {
             <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
               <div className="text-[#0070ad] text-4xl mb-4 transition-transform group-hover:scale-110">☁️</div>
               <h3 className="text-xl font-bold mb-4">Cloud & DevOps</h3>
-              <p className="text-gray-600 mb-6">Accelerate your delivery with AI-powered automation and cloud-native excellence.</p>
+              <DynamicContent industry="Finance">
+                <p className="text-gray-600 mb-6">High-frequency trading infrastructure and strict compliance pipelines for financial services.</p>
+              </DynamicContent>
+              <DynamicContent industry="Healthcare">
+                <p className="text-gray-600 mb-6">HIPAA-compliant data lakes and resilient multi-cloud strategies for healthcare providers.</p>
+              </DynamicContent>
+              <DynamicContent industry={["General", "Telecom", "Manufacturing", "Public Sector"]}>
+                <p className="text-gray-600 mb-6">Accelerate your delivery with AI-powered automation and cloud-native excellence.</p>
+              </DynamicContent>
               <button className="text-[#0070ad] font-bold text-sm hover:underline">Learn more →</button>
             </div>
+
             <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
               <div className="text-[#0070ad] text-4xl mb-4 transition-transform group-hover:scale-110">🤖</div>
               <h3 className="text-xl font-bold mb-4">Data & AI</h3>
-              <p className="text-gray-600 mb-6">Turn data into actionable intelligence with our advanced LLM and data platform services.</p>
+              <DynamicContent industry="Finance">
+                <p className="text-gray-600 mb-6">Algorithmic trading models and real-time fraud detection analytics platforms.</p>
+              </DynamicContent>
+              <DynamicContent industry="Healthcare">
+                <p className="text-gray-600 mb-6">Predictive patient diagnostics and AI-assisted medical imaging analysis.</p>
+              </DynamicContent>
+              <DynamicContent industry={["General", "Telecom", "Manufacturing", "Public Sector"]}>
+                <p className="text-gray-600 mb-6">Turn data into actionable intelligence with our advanced LLM and data platform services.</p>
+              </DynamicContent>
               <button className="text-[#0070ad] font-bold text-sm hover:underline">Learn more →</button>
             </div>
+
             <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
               <div className="text-[#0070ad] text-4xl mb-4 transition-transform group-hover:scale-110">🛡️</div>
               <h3 className="text-xl font-bold mb-4">Cybersecurity</h3>
-              <p className="text-gray-600 mb-6">Protect your assets with proactive, AI-driven security monitoring and threat response.</p>
+              <DynamicContent industry="Finance">
+                <p className="text-gray-600 mb-6">Zero-trust banking architectures and AI-driven anti-money laundering (AML) detection.</p>
+              </DynamicContent>
+              <DynamicContent industry="Healthcare">
+                <p className="text-gray-600 mb-6">Secure patient data enclaves and ransomware protection for critical medical infrastructure.</p>
+              </DynamicContent>
+              <DynamicContent industry={["General", "Telecom", "Manufacturing", "Public Sector"]}>
+                <p className="text-gray-600 mb-6">Protect your assets with proactive, AI-driven security monitoring and threat response.</p>
+              </DynamicContent>
               <button className="text-[#0070ad] font-bold text-sm hover:underline">Learn more →</button>
             </div>
           </div>
