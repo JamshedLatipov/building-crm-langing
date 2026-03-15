@@ -1,15 +1,27 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type UserRole = 'CEO' | 'CTO' | 'Gov' | 'Startup' | 'Investor' | 'General';
-export type Industry = 'Telecom' | 'Finance' | 'Healthcare' | 'Manufacturing' | 'Public Sector' | 'General';
+export type UserRole =
+  | "CEO"
+  | "CTO"
+  | "Gov"
+  | "Startup"
+  | "Investor"
+  | "General";
+export type Industry =
+  | "Telecom"
+  | "Finance"
+  | "Healthcare"
+  | "Manufacturing"
+  | "Public Sector"
+  | "General";
 
 interface VisitorProfile {
   role: UserRole;
   industry: Industry;
   region: string;
-  maturity: 'Low' | 'Medium' | 'High';
+  maturity: "Low" | "Medium" | "High";
 }
 
 interface AIContextType {
@@ -19,12 +31,14 @@ interface AIContextType {
 
 const AIContext = createContext<AIContextType | undefined>(undefined);
 
-export const AIProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AIProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [profile, setProfileState] = useState<VisitorProfile>({
-    role: 'General',
-    industry: 'General',
-    region: 'Global',
-    maturity: 'Medium',
+    role: "General",
+    industry: "General",
+    region: "Global",
+    maturity: "Medium",
   });
 
   const setProfile = (newProfile: Partial<VisitorProfile>) => {
@@ -33,14 +47,14 @@ export const AIProvider: React.FC<{ children: React.ReactNode }> = ({ children }
 
   // Mock AI Profiler: In a real app, this would analyze behavior or use cookies
   useEffect(() => {
-    const savedProfile = localStorage.getItem('visitorProfile');
+    const savedProfile = localStorage.getItem("visitorProfile");
     if (savedProfile) {
       setProfileState(JSON.parse(savedProfile));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('visitorProfile', JSON.stringify(profile));
+    localStorage.setItem("visitorProfile", JSON.stringify(profile));
   }, [profile]);
 
   return (
@@ -53,7 +67,7 @@ export const AIProvider: React.FC<{ children: React.ReactNode }> = ({ children }
 export const useAI = () => {
   const context = useContext(AIContext);
   if (context === undefined) {
-    throw new Error('useAI must be used within an AIProvider');
+    throw new Error("useAI must be used within an AIProvider");
   }
   return context;
 };

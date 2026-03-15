@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { useAI } from '@/context/AIContext';
-import { ChevronDown } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { useAI } from "@/context/AIContext";
+import { ChevronDown } from "lucide-react";
 
 export const Header: React.FC = () => {
   const { profile, setProfile } = useAI();
@@ -13,20 +13,28 @@ export const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-black tracking-tighter text-gray-900 group flex items-center">
-              DYNAMIC<span className="text-[#0070ad] group-hover:animate-pulse ml-0.5">AI</span>
+            <Link
+              href="/"
+              className="text-2xl font-black tracking-tighter text-gray-900 group flex items-center"
+            >
+              DYNAMIC
+              <span className="text-[#0070ad] group-hover:animate-pulse ml-0.5">
+                AI
+              </span>
             </Link>
             <nav className="hidden md:ml-12 md:flex md:space-x-10">
-              {['Insights', 'Industries', 'Services', 'About Us'].map((item) => (
-                <Link
-                  key={item}
-                  href="#"
-                  className="text-sm font-semibold text-gray-600 hover:text-[#0070ad] transition-all relative group"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0070ad] transition-all group-hover:w-full"></span>
-                </Link>
-              ))}
+              {["Insights", "Industries", "Services", "About Us"].map(
+                (item) => (
+                  <Link
+                    key={item}
+                    href="#"
+                    className="text-sm font-semibold text-gray-600 hover:text-[#0070ad] transition-all relative group"
+                  >
+                    {item}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0070ad] transition-all group-hover:w-full"></span>
+                  </Link>
+                ),
+              )}
             </nav>
           </div>
           <div className="flex items-center space-x-6">
@@ -47,7 +55,10 @@ export const Header: React.FC = () => {
                 <ChevronDown size={12} />
               </div>
             </div>
-            <Link href="#" className="bg-[#0070ad] text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-blue-500/20 hover:bg-[#005a8d] hover:shadow-blue-500/40 transition-all active:scale-95">
+            <Link
+              href="#"
+              className="bg-[#0070ad] text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-blue-500/20 hover:bg-[#005a8d] hover:shadow-blue-500/40 transition-all active:scale-95"
+            >
               Contact Us
             </Link>
           </div>
