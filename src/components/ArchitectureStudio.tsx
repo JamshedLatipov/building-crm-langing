@@ -73,12 +73,43 @@ export const ArchitectureStudio: React.FC = () => {
                   <h4 className="text-xl font-bold mb-2">Personalized {stack} Architecture</h4>
                   <p className="text-sm text-gray-500 mb-6">Optimized for: {selectedGoals.join(', ')}</p>
                   <div className="space-y-2 text-left bg-gray-50 p-4 rounded-lg text-xs font-mono">
-                    <p className="">[UI Layer] -{'>'} [API Gateway]</p>
-                    <p className="">[API Gateway] -{'>'} [Auth Service]</p>
-                    <p className="">[API Gateway] -{'>'} [{stack} Service Cluster]</p>
-                    <p className="">[{stack} Service Cluster] -{'>'} [Encrypted DB]</p>
-                    {selectedGoals.includes('Low Latency') && <p className="text-green-600">+ Edge Caching Enabled</p>}
-                    {selectedGoals.includes('Security') && <p className="text-green-600">+ WAF & IDS/IPS Layers Added</p>}
+                    <p className="">[Client Layer] -{'>'} [API Gateway / CDN]</p>
+                    <p className="">[API Gateway] -{'>'} [Identity & Access Management]</p>
+
+                    {stack === 'Microservices' && (
+                      <>
+                        <p className="">[API Gateway] -{'>'} [Service Mesh]</p>
+                        <p className="">[Service Mesh] -{'>'} [Microservices Cluster (EKS/AKS)]</p>
+                        <p className="">[Microservices Cluster] -{'>'} [Event Broker (Kafka/RabbitMQ)]</p>
+                      </>
+                    )}
+                    {stack === 'Serverless' && (
+                      <>
+                        <p className="">[API Gateway] -{'>'} [Cloud Functions (Lambda/Azure Functions)]</p>
+                        <p className="">[Cloud Functions] -{'>'} [Managed Event Bridge]</p>
+                      </>
+                    )}
+                    {stack === 'Data Engineering' && (
+                      <>
+                        <p className="">[Ingestion Layer] -{'>'} [Data Streaming (Kafka/Kinesis)]</p>
+                        <p className="">[Data Streaming] -{'>'} [Data Lake (S3/ADLS)]</p>
+                        <p className="">[Data Lake] -{'>'} [Data Warehouse (Snowflake/BigQuery)]</p>
+                      </>
+                    )}
+                    {stack === 'Modern Web' && (
+                      <>
+                        <p className="">[CDN] -{'>'} [Next.js SSR/SSG Nodes]</p>
+                        <p className="">[Next.js Nodes] -{'>'} [Headless CMS / API Layer]</p>
+                      </>
+                    )}
+
+                    <p className="">[{stack} Core] -{'>'} [Primary Database (SQL/NoSQL)]</p>
+
+                    {selectedGoals.includes('High Availability') && <p className="text-blue-600">+ Multi-Region Active-Active Deployment</p>}
+                    {selectedGoals.includes('Low Latency') && <p className="text-blue-600">+ Distributed Edge Caching (Redis/Memcached)</p>}
+                    {selectedGoals.includes('Security') && <p className="text-green-600">+ Zero-Trust Network & WAF / DDoS Protection</p>}
+                    {selectedGoals.includes('Cost Efficiency') && <p className="text-purple-600">+ Auto-Scaling with Spot Instances & Serverless Tiers</p>}
+                    {selectedGoals.includes('Scalability') && <p className="text-orange-600">+ Horizontal Pod Autoscaler & Read Replicas</p>}
                   </div>
                   <div className="mt-8 flex space-x-4 justify-center">
                     <button className="text-[#0070ad] text-sm font-bold underline">Export PDF</button>

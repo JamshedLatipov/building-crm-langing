@@ -25,22 +25,44 @@ export const BriefBuilder: React.FC = () => {
   const generateBrief = () => {
     setIsGenerating(true);
     setTimeout(() => {
+      const pType = answers['What are you building? (Web App, Mobile, AI Platform, etc.)'] || 'Digital Transformation';
+      const goal = answers['What is the primary business goal?'] || 'Not specified';
+      const target = answers['Who are the target users?'] || 'Not specified';
+      const time = answers['What is your preferred timeline?'] || 'TBD';
+      const sec = answers['Are there specific security requirements?'] || 'Enterprise Standard';
+
+      const pTypeLower = pType.toLowerCase();
+      const techStack = pTypeLower.includes('mobile') ? 'React Native / Flutter' :
+                        pTypeLower.includes('ai') ? 'Python / LangChain / HuggingFace' :
+                        pTypeLower.includes('web') ? 'Next.js / React / Node.js' : 'Cloud Native Architecture';
+
+      const aiRecs = [];
+      if (pTypeLower.includes('ai')) {
+        aiRecs.push('- Fine-tune LLMs for specific industry data.');
+        aiRecs.push('- Implement RAG with vector databases (Pinecone/Weaviate).');
+      } else if (pTypeLower.includes('mobile')) {
+        aiRecs.push('- Integrate on-device ML models for offline capabilities.');
+        aiRecs.push('- Use AI-driven analytics for user behavior tracking.');
+      } else {
+        aiRecs.push('- Implement RAG (Retrieval-Augmented Generation) for knowledge management.');
+        aiRecs.push('- Deploy automated CI/CD pipelines with integrated security scanning.');
+        aiRecs.push('- Use predictive monitoring for proactive system health.');
+      }
+
       const generatedBrief = `
-# Project Brief: ${answers['What are you building? (Web App, Mobile, AI Platform, etc.)'] || 'Digital Transformation'}
+# Project Brief: ${pType}
 
 ## Strategic Overview
-Goal: ${answers['What is the primary business goal?'] || 'Not specified'}
-Target Audience: ${answers['Who are the target users?'] || 'Not specified'}
+Goal: ${goal}
+Target Audience: ${target}
 
 ## Technical Roadmap
-Focus: High-performance scalable architecture.
-Security: ${answers['Are there specific security requirements?'] || 'Enterprise Standard'}
-Estimated Timeline: ${answers['What is your preferred timeline?'] || 'TBD'}
+Focus: High-performance scalable architecture using ${techStack}.
+Security: ${sec}
+Estimated Timeline: ${time}
 
 ## AI Recommendations
-- Implement RAG (Retrieval-Augmented Generation) for knowledge management.
-- Deploy automated CI/CD pipelines with integrated security scanning.
-- Use predictive monitoring for proactive system health.
+${aiRecs.join('\n')}
 `;
       setBrief(generatedBrief);
       setIsGenerating(false);
