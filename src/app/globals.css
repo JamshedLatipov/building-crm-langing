@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --capgemini-blue: #0070ad;
-  --capgemini-dark-blue: #005a8d;
+  --brand-blue: #0070ad;
+  --brand-dark: #005a8d;
   --background: #ffffff;
   --foreground: #333333;
 }
