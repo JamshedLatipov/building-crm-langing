@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
                 (item) => (
                   <Link
                     key={item}
-                    href="#"
+                    href={item === "Insights" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`}
                     className="text-sm font-semibold text-gray-600 hover:text-[#0070ad] transition-all relative group"
                   >
                     {item}
@@ -56,7 +56,7 @@ export const Header: React.FC = () => {
               </div>
             </div>
             <Link
-              href="#"
+              href="/contact"
               className="bg-[#0070ad] text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-blue-500/20 hover:bg-[#005a8d] hover:shadow-blue-500/40 transition-all active:scale-95"
             >
               Contact Us
